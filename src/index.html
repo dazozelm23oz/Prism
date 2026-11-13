@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prism</title>
+  <link rel="stylesheet" href="./vendor/mathlive/mathlive-fonts.css">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./vendor/mathlive/mathlive.min.js"></script>
+</head>
+<body>
+  <!-- Frameless KDE Breeze Titlebar -->
+  <header class="titlebar" data-tauri-drag-region>
+    <div class="titlebar-drag-region" data-tauri-drag-region>
+      <div class="app-icon">Δ</div>
+      <span class="app-title" data-tauri-drag-region>Prism</span>
+    </div>
+    <div class="window-controls">
+      <button class="window-btn" id="btn-win-min" title="Minimize">&#9472;</button>
+      <button class="window-btn" id="btn-win-max" title="Maximize">&#9633;</button>
+      <button class="window-btn close" id="btn-win-close" title="Close">&#10005;</button>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <!-- Left Dock: Desmos-Style Expression List & Sliders -->
+    <aside class="sidebar">
+      <!-- Quick Insert Chips Strip -->
+      <div class="quick-chips-strip" id="quick-chips-bar"></div>
+
+      <!-- Expression / Slider Rows -->
+      <div class="expression-list" id="expression-list"></div>
+
+      <button class="add-row-btn" id="btn-add-row" type="button">
+        <span>+</span> Add Expression
+      </button>
+    </aside>
+
+    <!-- Main Workspace Tabs -->
+    <main class="main-content">
+      <!-- Tab Bar -->
+      <nav class="tab-bar">
+        <button class="tab-btn active" data-tab="tab-graph">Graph</button>
+        <button class="tab-btn" data-tab="tab-solve">Solve</button>
+        <button class="tab-btn" data-tab="tab-calculus">Calculus</button>
+        <button class="tab-btn" data-tab="tab-matrix">Matrix</button>
+        <button class="tab-btn" data-tab="tab-optim">Optimisation</button>
+        <button class="tab-btn" data-tab="tab-settings">Settings</button>
+      </nav>
+
+      <!-- Tab: Graph -->
+      <section class="tab-pane active" id="tab-graph">
+        <div class="graph-viewport">
+          <canvas id="plot-canvas"></canvas>
+          <div class="floating-graph-controls">
+            <button class="graph-ctrl-btn" id="btn-aspect-lock" title="Lock Aspect Ratio (1:1)">1:1 Aspect</button>
+            <button class="graph-ctrl-btn" id="btn-trace-mode" title="Trace Curve Tooltip">Trace Mode</button>
+            <button class="graph-ctrl-btn" id="btn-reset-view" title="Reset Viewport">Reset View</button>
+            <button class="graph-ctrl-btn" id="btn-export-png" title="Export PNG">PNG</button>
+            <button class="graph-ctrl-btn" id="btn-export-pdf" title="Export PDF (Ctrl+P)">PDF</button>
+          </div>
+          <div class="critical-points-dock" id="cp-dock" style="display: none;">
+            <div style="font-weight: bold; margin-bottom: 6px; color: var(--accent);">Stationary & Critical Points</div>
+            <div id="cp-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab: Solve -->
+      <section class="tab-pane" id="tab-solve">
+        <div id="solver-target"></div>
+      </section>
+
+      <!-- Tab: Calculus -->
+      <section class="tab-pane" id="tab-calculus">
+        <div class="method-selector-bar">
+          <button class="action-btn primary" id="btn-calc-diff">Differentiate f'(x)</button>
+          <button class="action-btn" id="btn-calc-int">Integrate &int; f(x) dx</button>
+        </div>
+        <div id="calculus-cards-target"></div>
+      </section>
+
+      <!-- Tab: Matrix -->
+      <section class="tab-pane" id="tab-matrix">
+        <div id="matrix-target"></div>
+      </section>
+
+      <!-- Tab: Optimisation -->
+      <section class="tab-pane" id="tab-optim">
+        <div id="optim-target"></div>
+      </section>
+
+      <!-- Tab: Settings -->
+      <section class="tab-pane" id="tab-settings">
+        <div id="settings-target"></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

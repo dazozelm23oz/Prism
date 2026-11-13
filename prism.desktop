@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Prism
+Comment=Native Linux/KDE desktop graphing calculator and computer algebra workspace
+Exec=prism
+Icon=prism
+Terminal=false
+Type=Application
+Categories=Education;Science;Math;
+StartupNotify=true
+MimeType=application/json;
