@@ -17,9 +17,16 @@ pub struct BackupResult {
 
 pub fn execute_backup(summary: &str) -> Result<BackupResult, String> {
     let base_backup_root = Path::new("/mnt/StudyBackups/MathCalc");
+    let repo_root = std::env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
+    let repo_root = if repo_root.ends_with("src-tauri") {
+        repo_root.parent().unwrap_or(&repo_root).to_path_buf()
+    } else {
+        repo_root
+    };
+
     if !base_backup_root.exists() {
         let err_msg = "Backup destination /mnt/StudyBackups/MathCalc does not exist".to_string();
-        log_to_backup_doc(false, "", "", &err_msg);
+        log_to_backup_doc(&repo_root, false, "", "", &err_msg);
         return Err(err_msg);
     }
 
@@ -138,6 +145,7 @@ pub fn execute_backup(summary: &str) -> Result<BackupResult, String> {
     }
 
     log_to_backup_doc(
+        &repo_root,
         true,
         &dest_dir.to_string_lossy(),
         &commit_hash,
@@ -184,8 +192,8 @@ fn copy_directory_recursive(src: &Path, dst: &Path) -> Result<(), String> {
     Ok(())
 }
 
-fn log_to_backup_doc(success: bool, dir: &str, commit: &str, notes: &str) {
-    let doc_path = Path::new("docs/BACKUP_LOG.md");
+fn log_to_backup_doc(repo_root: &Path, success: bool, dir: &str, commit: &str, notes: &str) {
+    let doc_path = repo_root.join("docs/BACKUP_LOG.md");
     if let Some(parent) = doc_path.parent() {
         let _ = fs::create_dir_all(parent);
     }
