@@ -1,0 +1,14 @@
+# Cargo & Tauri build artifacts
+target/
+src-tauri/target/
+src-tauri/gen/schemas/
+**/*.rs.bk
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
